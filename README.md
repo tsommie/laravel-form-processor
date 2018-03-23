@@ -35,7 +35,7 @@ This is a library that was inspired by one of the Laravel project i worked on re
 Add the Laravel Form Processor package to your `composer.json` file.
 
 ```
-composer require ac-developers/laravel-form-processor
+composer require tsommie/laravel-form-processor
 ```
 
 > **Auto-discovery:** Is supported in Laravel Form Processor [auto-discovery](https://medium.com/@taylorotwell/package-auto-discovery-in-laravel-5-5-ea9e3ab20518) for Laravel 5.5 and greater.
