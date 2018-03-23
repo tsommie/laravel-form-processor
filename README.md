@@ -47,14 +47,14 @@ In your app config, add the `LaravelFacebookSdkServiceProvider` to the providers
 
 ```php
 'providers' => [
-    AcDevelopers\LaravelFormProcessor\LaravelFacebookSdkServiceProvider::class,
+    AcDevelopers\LaravelFormProcessor\LaravelFormProcessorServiceProvider::class,
     ];
 ```
 
 For **Lumen**, add the provider to your `bootstrap/app.php` file.
 
 ```php
-$app->register(AcDevelopers\LaravelFormProcessor\LaravelFacebookSdkServiceProvider::class);
+$app->register(AcDevelopers\LaravelFormProcessor\LaravelFormProcessorServiceProvider::class);
 ```
 
 #### 1.1.2.2. Facade (optional)
@@ -63,7 +63,7 @@ If you want to make use of the facade, add it to the aliases array in your app c
 
 ```php
 'aliases' => [
-    'LaravelFormProcessorFacade' => AcDevelopers\LaravelFormProcessor\LaravelFacebookSdkServiceProviderFacade::class,
+    'LaravelFormProcessorFacade' => AcDevelopers\LaravelFormProcessor\LaravelFormProcessorFacade::class,
     ];
 ```
 ### 1.1.3. Publishing config file.
