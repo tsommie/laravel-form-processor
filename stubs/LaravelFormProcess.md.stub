@@ -1,0 +1,34 @@
+<?php namespace DummyNamespace;
+
+use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessableInterface;
+use AcDevelopers\LaravelFormProcessor\LaravelFormProcess;
+use Illuminate\Http\Request;
+use NamespaceDummyModel;
+
+/**
+ * Class DummyClass
+ 
+ * @package DummyNamespace
+ */
+class DummyClass extends LaravelFormProcess implements LaravelFormProcessableInterface
+{
+    /**
+     * DummyClass constructor.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \NamespaceDummyModel $dummyModel
+     */
+    public function __construct(Request $request, DummyModel $dummyModel)
+    {
+        $this->request = $request;
+        $this->model = $dummyModel;
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function handle()
+    {
+        //
+    }
+}

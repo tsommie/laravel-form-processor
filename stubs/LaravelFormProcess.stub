@@ -1,0 +1,20 @@
+<?php namespace DummyNamespace;
+
+use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessableInterface;
+use AcDevelopers\LaravelFormProcessor\LaravelFormProcess;
+
+/**
+ * Class DummyClass
+ 
+ * @package DummyNamespace
+ */
+class DummyClass extends LaravelFormProcess implements LaravelFormProcessableInterface
+{
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function handle()
+    {
+        //
+    }
+}
