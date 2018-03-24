@@ -1,5 +1,5 @@
 {
-    "name": "tsommie/laravel-form-processor",
+    "name": "ac-developers/laravel-form-processor",
     "description": "An easy way to process multiple form requests from one controller method.",
     "keywords": ["laravel", "lumen", "laravel-form-processor", "form", "Anitche Chisom"],
     "type": "library",
