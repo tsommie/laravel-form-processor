@@ -199,7 +199,7 @@ You can use the `LaravelFormProcessorFacade` if you’re more comfortable with F
     }
 ```
 
-and then in the form you wish to process you will use a `@process` directive provided with the package to point to the process that will be used to run handle the form request.
+and then in the form you wish to process you will use a `@process` directive provided with the package to point to the process that will be using to run handle the form request.
 
 ```
 <form action="route('articles.update', ['id' => article->id])" method="POST">
