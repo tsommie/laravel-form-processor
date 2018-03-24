@@ -43,7 +43,7 @@ composer require ac-developers/laravel-form-processor
 ### 1.1.2. Installation on Lumen and Laravel 5.4 and below.
 #### 1.1.2.1. Service Provider
 
-In your app config, add the `LaravelFacebookSdkServiceProvider` to the providers array.
+In your app config, add the `LaravelFormProcessorServiceProvider` to the providers array.
 
 ```php
 'providers' => [
