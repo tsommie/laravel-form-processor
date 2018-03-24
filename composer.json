@@ -27,7 +27,7 @@
                 "AcDevelopers\\LaravelFormProcessor\\LaravelFormProcessorServiceProvider"
             ],
             "aliases": {
-                "LaravelFormProcessorFacade": "AcDevelopers\\LaravelFormProcessor\\LaravelFormProcessorFacade"
+                "LaravelFormProcessorFacade": "AcDevelopers\\LaravelFormProcessor\\Facades\\LaravelFormProcessorFacade"
             }
         }
     }
