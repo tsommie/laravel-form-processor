@@ -9,6 +9,7 @@ use Laravel\Lumen\Application as LumenApplication;
 
 /**
  * Class LaravelFormProcessorServiceProvider
+ * 
  * @package AcDevelopers\LaravelFormProcessor
  */
 class LaravelFormProcessorServiceProvider extends  LaravelServiceProvider
@@ -39,7 +40,7 @@ class LaravelFormProcessorServiceProvider extends  LaravelServiceProvider
                 $this->configPath => config_path('laravel-form-processor.php')
             ], 'config');
         } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('laravel-model-processor');
+            $this->app->configure('laravel-form-processor');
         }
 
         if ($this->app->runningInConsole()) {
