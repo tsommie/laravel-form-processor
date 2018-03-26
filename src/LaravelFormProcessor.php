@@ -3,6 +3,7 @@
 use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessableInterface;
 use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessorInterface;
 use AcDevelopers\LaravelFormProcessor\Exceptions\LaravelFormProcessorException;
+use Illuminate\Support\HtmlString;
 
 /**
  * Class LaravelFormProcessor
@@ -53,6 +54,6 @@ class LaravelFormProcessor implements LaravelFormProcessorInterface
      */
     public static function process($processClassPath)
     {
-        return '<input name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>';
+        return new HtmlString('<input type="text" name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>');
     }
 }
