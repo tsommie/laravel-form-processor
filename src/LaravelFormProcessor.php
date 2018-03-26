@@ -53,6 +53,6 @@ class LaravelFormProcessor implements LaravelFormProcessorInterface
      */
     public static function process($processClassPath)
     {
-        return '<?php print \'<input type="text" name="_prKey" value="' . encrypt($processClassPath) . '" hidden/>\' ?>';
+        return '<input type="text" name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>';
     }
 }
