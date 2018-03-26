@@ -74,7 +74,7 @@ class LaravelFormProcessorServiceProvider extends  LaravelServiceProvider
     private function handleBladeDirective()
     {
         LaravelBlade::directive('process', function ($processClassPath) {
-            return '<?php print \'<input type="text" name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>\' ?>';
+            return '<?php print \'<input name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>\' ?>';
         });
     }
 }
