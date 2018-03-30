@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
  * Class LaravelFormProcessorFacade
  *
  * @method static \Illuminate\Http\Response run(\AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessableInterface $laravelFormProcess)
- * @method static LaravelFormProcess retrieveProcessFromFormField($_prKey)
+ * @method static \AcDevelopers\LaravelFormProcessor\LaravelFormProcess retrieveProcessFromFormField($_prKey)
  * @method static string process($processClassPath)
  *
  * @package AcDevelopers\LaravelFormProcessor

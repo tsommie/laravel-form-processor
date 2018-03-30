@@ -16,7 +16,7 @@ interface LaravelFormProcessorInterface
      * @return \Illuminate\Http\Response
      * @throws LaravelFormProcessorException
      */
-    public static function run(LaravelFormProcessableInterface $laravelFormProcess);
+    public function run(LaravelFormProcessableInterface $laravelFormProcess);
 
     /**
      * Retrieve the process attached to the form request submitted.
@@ -25,7 +25,7 @@ interface LaravelFormProcessorInterface
      * @return LaravelFormProcess
      * @throws LaravelFormProcessorException
      */
-    public static function retrieveProcessFromFormField($_prKey);
+    public function retrieveProcessFromFormField($_prKey);
 
     /**
      * Process form field
@@ -33,5 +33,5 @@ interface LaravelFormProcessorInterface
      * @param $processClassPath
      * @return string
      */
-    public static function process($processClassPath);
+    public function process($processClassPath);
 }

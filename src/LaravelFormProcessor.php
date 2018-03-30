@@ -19,7 +19,7 @@ class LaravelFormProcessor implements LaravelFormProcessorInterface
      * @return \Illuminate\Http\Response
      * @throws LaravelFormProcessorException
      */
-    public static function run(LaravelFormProcessableInterface $laravelFormProcess)
+    public function run(LaravelFormProcessableInterface $laravelFormProcess)
     {
         if ($laravelFormProcess instanceof LaravelFormProcess) {
             return $laravelFormProcess->handle();
@@ -35,7 +35,7 @@ class LaravelFormProcessor implements LaravelFormProcessorInterface
      * @return LaravelFormProcess
      * @throws LaravelFormProcessorException
      */
-    public static function retrieveProcessFromFormField($_prKey)
+    public function retrieveProcessFromFormField($_prKey)
     {
         $laravelFormProcess = decrypt($_prKey);
 
@@ -52,7 +52,7 @@ class LaravelFormProcessor implements LaravelFormProcessorInterface
      * @param $processClassPath
      * @return string
      */
-    public static function process($processClassPath)
+    public function process($processClassPath)
     {
         return new HtmlString('<input name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>');
     }
