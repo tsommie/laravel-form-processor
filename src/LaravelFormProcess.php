@@ -15,16 +15,6 @@ abstract class LaravelFormProcess implements LaravelFormProcessableInterface
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    protected $model;
-
-    /**
      * Handle form processing
      *
      * @return \Illuminate\Http\Response

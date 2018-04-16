@@ -139,6 +139,10 @@ After the Process class has been generated, all the logic that is required to up
 ```
 class PublishArticleProcess extends LaravelFormProcess implements LaravelFormProcessableInterface
 {
+    protected $request;
+
+    protected $article;
+
     /**
      * PublishArticleProcess constructor.
      * @param \Illuminate\Http\Request $request
@@ -147,7 +151,7 @@ class PublishArticleProcess extends LaravelFormProcess implements LaravelFormPro
     public function __construct(Request $request, Article $article)
     {
         $this->request = $request;
-        $this->model = $article;
+        $this->article = $article;
     }
 
     /**
@@ -159,11 +163,11 @@ class PublishArticleProcess extends LaravelFormProcess implements LaravelFormPro
         $this->validate($this->request, ['published' => 'required']);
 
         // Update the model
-        $result = $this->model->update($this->request->all());
+        $result = $this->article->update($this->request->all());
 
         // Return to any desired location if update was successful. 
         if ($result) {
-            return redirect()->route('articles.show', ['id' => $this->model->id])
+            return redirect()->route('articles.show', ['id' => $this->article->id])
                 ->with('status', 'Article was updated successfully.');
         }
 
