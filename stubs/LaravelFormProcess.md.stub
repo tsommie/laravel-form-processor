@@ -13,6 +13,16 @@ use NamespaceDummyModel;
 class DummyClass extends LaravelFormProcess implements LaravelFormProcessableInterface
 {
     /**
+     * @var \Illuminate\Http\Request
+     */
+    protected $request;
+
+    /**
+     * @var \NamespaceDummyModel
+     */
+    protected $dummyModel;
+
+    /**
      * DummyClass constructor.
      *
      * @param \Illuminate\Http\Request $request
@@ -21,7 +31,7 @@ class DummyClass extends LaravelFormProcess implements LaravelFormProcessableInt
     public function __construct(Request $request, DummyModel $dummyModel)
     {
         $this->request = $request;
-        $this->model = $dummyModel;
+        $this->dummyModel = $dummyModel;
     }
 
     /**
