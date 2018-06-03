@@ -1,9 +1,11 @@
-<?php namespace AcDevelopers\LaravelFormProcessor;
+<?php
 
-use AcDevelopers\LaravelFormProcessor\Command\GenerateLaravelFormProcess;
+namespace AcDevelopers\LaravelFormProcessor;
+
+use AcDevelopers\LaravelFormProcessor\Console\Commands\MakeProcessCommand;
 use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessorInterface;
-use Illuminate\Support\Facades\Blade as LaravelBlade;
-use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Laravel\Lumen\Application as LumenApplication;
 
@@ -12,24 +14,10 @@ use Laravel\Lumen\Application as LumenApplication;
  * 
  * @package AcDevelopers\LaravelFormProcessor
  */
-class LaravelFormProcessorServiceProvider extends  LaravelServiceProvider
+class LaravelFormProcessorServiceProvider extends ServiceProvider
 {
     /**
-     * Path to the config file
-     *
-     * @var string
-     */
-    protected $configPath = __DIR__ . '/../config/config.php';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
-     * Bootstrap the application events.
+     * Bootstrap services.
      *
      * @return void
      */
@@ -37,7 +25,7 @@ class LaravelFormProcessorServiceProvider extends  LaravelServiceProvider
     {
         if ($this->app instanceof LaravelApplication) {
             $this->publishes([
-                $this->configPath => config_path('laravel-form-processor.php')
+                __DIR__.'/../config/config.php' => config_path('laravel-form-processor.php'),
             ], 'config');
         } elseif ($this->app instanceof LumenApplication) {
             $this->app->configure('laravel-form-processor');
@@ -45,36 +33,30 @@ class LaravelFormProcessorServiceProvider extends  LaravelServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                GenerateLaravelFormProcess::class
+                MakeProcessCommand::class
             ]);
         }
 
-        $this->app->bind('LaravelFormProcessor', function (){
-            return new LaravelFormProcessor;
+        Blade::directive('renderProcess', function ($processClassPath) {
+            return "<?php print '" . app('formProcessor')->renderProcess($processClassPath) . "' ?>";
         });
-
-        $this->handleBladeDirective();
     }
 
     /**
-     * Register the application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
-        $this->mergeConfigFrom($this->configPath, 'laravel-form-processor');
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/config.php', 'laravel-form-processor'
+        );
+
+        $this->app->singleton('formProcessor', function () {
+            return new LaravelFormProcessor;
+        });
 
         $this->app->bind(LaravelFormProcessorInterface::class, LaravelFormProcessor::class);
-    }
-
-    /**
-     * Process form field
-     */
-    private function handleBladeDirective()
-    {
-        LaravelBlade::directive('process', function ($processClassPath) {
-            return '<?php print \'<input name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>\' ?>';
-        });
     }
 }

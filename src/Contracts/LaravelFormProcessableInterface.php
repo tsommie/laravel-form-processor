@@ -1,7 +1,10 @@
-<?php namespace AcDevelopers\LaravelFormProcessor\Contracts;
+<?php
+
+namespace AcDevelopers\LaravelFormProcessor\Contracts;
 
 /**
  * Class LaravelFormProcess
+ *
  * @package AcDevelopers\LaravelFormProcessor
  */
 interface LaravelFormProcessableInterface

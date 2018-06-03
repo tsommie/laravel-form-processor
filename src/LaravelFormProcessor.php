@@ -1,13 +1,15 @@
-<?php namespace AcDevelopers\LaravelFormProcessor;
+<?php
+
+namespace AcDevelopers\LaravelFormProcessor;
 
 use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessableInterface;
 use AcDevelopers\LaravelFormProcessor\Contracts\LaravelFormProcessorInterface;
-use AcDevelopers\LaravelFormProcessor\Exceptions\LaravelFormProcessorException;
+use AcDevelopers\LaravelFormProcessor\Exception\LaravelFormProcessException;
 use Illuminate\Support\HtmlString;
 
 /**
  * Class LaravelFormProcessor
- * 
+ *
  * @package AcDevelopers\LaravelFormProcessor
  */
 class LaravelFormProcessor implements LaravelFormProcessorInterface
@@ -15,45 +17,50 @@ class LaravelFormProcessor implements LaravelFormProcessorInterface
     /**
      * Run the process retrieved from the form submitted.
      *
-     * @param LaravelFormProcessableInterface $laravelFormProcess
+     * @param LaravelFormProcessableInterface $processable
      * @return \Illuminate\Http\Response
-     * @throws LaravelFormProcessorException
+     * @throws \Throwable
+     * @throws string
      */
-    public function run(LaravelFormProcessableInterface $laravelFormProcess)
+    public function run(LaravelFormProcessableInterface $processable)
     {
-        if ($laravelFormProcess instanceof LaravelFormProcess) {
-            return $laravelFormProcess->handle();
-        }
+        throw_unless($processable instanceof LaravelFormProcess, LaravelFormProcessException::class,
+            class_basename($processable) . ' is not an instance of ' . LaravelFormProcess::class);
 
-        throw new LaravelFormProcessorException($laravelFormProcess . ' is not an instance of ' . LaravelFormProcess::class);
+        return $processable->handle();
     }
 
     /**
-     * Retrieve the process attached to the form request submitted.
+     * Retrieve the process attached to the form request submitted and throw
+     * and exception if it does not exist in the specified directory.
      *
      * @param string $_prKey
-     * @return LaravelFormProcess
-     * @throws LaravelFormProcessorException
+     * @return LaravelFormProcess|string
+     * @throws \Throwable
+     * @throws string
      */
     public function retrieveProcessFromFormField($_prKey)
     {
-        $laravelFormProcess = decrypt($_prKey);
+        $formProcess = decrypt($_prKey);
 
-        if (! class_exists($laravelFormProcess)) {
-            throw new LaravelFormProcessorException('This process does not exist: ' . $laravelFormProcess);
-        }
+        throw_unless(class_exists($formProcess), LaravelFormProcessException::class,
+            'This process does not exist: ' . $formProcess);
 
-        return $laravelFormProcess;
+        return $formProcess;
     }
 
     /**
-     * Process form field
+     * Render hidden input field for form process.
      *
-     * @param $processClassPath
-     * @return string
+     * @param string $processClassPath
+     * @return HtmlString
+     * @throws \Throwable
+     * @throws string
      */
-    public function process($processClassPath)
+    public function renderProcess($processClassPath = '')
     {
-        return new HtmlString('<input name="_prKey" value="' . encrypt($processClassPath) . '" type="hidden"/>');
+        throw_if($processClassPath === '', LaravelFormProcessException::class, 'Expected a process class path, null given.');
+
+        return new HtmlString('<input name="_prKey" value="'.encrypt($processClassPath).'" type="hidden"/>');
     }
 }

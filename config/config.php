@@ -3,15 +3,11 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Default namespaces for Process classes
+    | Default namespaces for the classes
     |--------------------------------------------------------------------------
     */
-    'process-path' => '\Processes',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default namespaces for Model classes
-    |--------------------------------------------------------------------------
-    */
-    'model-path'     => 'App\\'
+    'namespaces' => [
+        'process'   => 'App\Processes',
+        'model'        => 'App\\',
+    ],
 ];
